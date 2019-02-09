@@ -1,61 +1,35 @@
 package com.person.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import lombok.Data;
+
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "person")
+@Data
 public class Person {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(name = "first_name", nullable = false)
     private String firstName;
+    @Column(name = "last_name" , nullable = false)
     private String lastName;
+    @Column(name = "date_of_birth", nullable = false)
     private Date dateOfBirth;
+    @Column(name = "gender" , nullable = false)
     private String gender;
-
-    public Person() {
-    }
-
-    public Person(Long id, String firstName, String lastName, Date dateOfBirth, String gender) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.dateOfBirth = dateOfBirth;
-        this.gender = gender;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    @Override
-    public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
-                ", gender='" + gender + '\'' +
-                '}';
-    }
+    @Column(name = "client_id_number" , nullable = false, unique = true)
+    private String cin;
+    @Column(name = "disability_active" , nullable = false)
+    private boolean disabilityActive;
+    @Column(name = "marital_status" , nullable = false)
+    private String maritalStatus;
+    @Column(name = "ssn" , nullable = false)
+    private String ssn;
+    @Column(name = "pregnancy_active" , nullable = false)
+    private boolean pregnancyActive;
 
 }

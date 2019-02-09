@@ -1,41 +1,48 @@
 package com.person.controller;
 
+import com.person.exceptions.PersonNotFoundException;
 import com.person.model.Person;
-import com.person.repository.PersonRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.person.services.PersonService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
+
+/**
+ * Controller class
+ *
+ * @author spaduri
+ */
+
+@Slf4j
 @RestController
 @RequestMapping("rest/db")
 public class PersonController {
 
-    @Autowired
-    private PersonRepository repository;
+    private PersonService personService;
+
+    public PersonController(PersonService personService) {
+        this.personService = personService;
+    }
 
     @PostMapping("/create")
     public Person createPerson(@RequestBody final Person person) {
-        System.out.println(person.toString());
-        return repository.save(person);
+        return personService.save(person);
     }
 
     @GetMapping("/findAll")
     public List<Person> findAllPerson() {
-        return repository.findAll();
+        return personService.findAll();
     }
 
     @PostMapping("/delete/{id}")
     public void deletePerson(@PathVariable("id ") Long id) {
-        repository.deleteById(id);
+        personService.deletePerson(id);
     }
 
     @GetMapping("/find/{id}")
     public Person findPerson(@PathVariable("id") Long id) {
-        Optional<Person> optional = repository.findById(id);
-        return optional.get();
+        return personService.findPerson(id).orElseThrow(() -> new PersonNotFoundException("Person with this id " + id + "doesn't exist"));
     }
-
-
 }
