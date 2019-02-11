@@ -1,4 +1,4 @@
-package com.data.collection.datacollectionservice;
+package com.data.collection.income;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

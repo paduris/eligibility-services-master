@@ -10,12 +10,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("rest/income/")
+@RequestMapping("rest/income")
 @Slf4j
 public class IncomeController {
 
     private IncomeRepository repository;
-
 
     @Autowired
     public IncomeController(IncomeRepository repository) {
@@ -27,9 +26,9 @@ public class IncomeController {
         return this.repository.save(income);
     }
 
-    @GetMapping("/getIncomeForPerson")
-    public List<Income> getIncomeForPerson(@PathVariable String persCIN) {
-        return repository.findIncomesByPersCIN(persCIN).orElseThrow(() -> new IncomeNotFoundException("No Income found for the person with cin " + persCIN));
+    @GetMapping("/findPersonIncome/{personCIN}")
+    public List<Income> getIncomeForPerson(@PathVariable String personCIN) {
+        return repository.findIncomesByPersCIN(personCIN).orElseThrow(() -> new IncomeNotFoundException("No Income found for the person with cin " + personCIN));
     }
 
 }

@@ -10,9 +10,9 @@ Request:
 {
 	"typeCode":"self",
 	"effectiveDate" :"2018-01-01",
-    "persCIN" :"2234234234234",
-	"incomeSource" :"Other income",
-	"annualIncome":"100000"
-
-
-}
+     "persCIN" :"2234234234234",
+ 	"incomeSource" :"Other income",
+ 	"annualIncome":"100000"
+ 
+ 
+ }
