@@ -23,5 +23,4 @@ public class PersonNotFoundException extends RuntimeException {
     public PersonNotFoundException(Throwable throwable) {
         super(throwable);
     }
-
 }

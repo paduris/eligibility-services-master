@@ -14,7 +14,7 @@
         <module>income-service</module>
         <module>service-registry</module>
         <module>person-service</module>
-        <module>case-registration</module>
+        <module>case-service</module>
         <module>verification-service</module>
         <module>rules-engine-service</module>
     </modules>
