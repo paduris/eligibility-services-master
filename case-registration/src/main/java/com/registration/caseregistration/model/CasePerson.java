@@ -1,33 +1,40 @@
 package com.registration.caseregistration.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "case_pers")
 @Data
+@EqualsAndHashCode(exclude = "caseObj")
 public class CasePerson extends AuditDTO {
-
-    public void setCaseId(Long caseId) {
-        this.caseId = caseId;
-    }
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    private Long id;
-
-    @Column(name = "case_id", nullable = false,unique = true)
-    private Long caseId;
+    @Column(name = "case_pers_id")
+    private Long casePersId;
 
     @Column(name = "pers_cin", nullable = false, unique = true)
-    private String persCIN;
+    private String personClientNumber;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "case_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "case_id")
+    @JsonBackReference
     private Case caseObj;
+
+    public CasePerson(String personClientNumber) {
+        this.personClientNumber = personClientNumber;
+    }
+
+    public CasePerson() {
+    }
+
+    public void setCaseObj(Case caseObj) {
+        this.caseObj = caseObj;
+    }
+
 }

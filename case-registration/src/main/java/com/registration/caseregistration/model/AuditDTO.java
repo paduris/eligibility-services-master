@@ -2,6 +2,7 @@ package com.registration.caseregistration.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -18,6 +19,7 @@ import java.util.Date;
 @JsonIgnoreProperties(
         value = {"createdOn","updatedOn"},allowGetters = true
 )
+@EqualsAndHashCode
 public abstract class AuditDTO {
 
     @UpdateTimestamp

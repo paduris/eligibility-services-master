@@ -1,6 +1,7 @@
 package com.registration.caseregistration.model;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -14,14 +15,25 @@ public class Case extends AuditDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Column(name = "case_id")
+    private Long caseId;
 
-    public Long getId() {
-        return id;
+    @JsonManagedReference
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "caseObj", cascade = CascadeType.ALL, targetEntity = CasePerson.class)
+    private Set<CasePerson> casePers = new HashSet<>(0);
+
+    @Column(name = "case_number", nullable = false, unique = true)
+    private String caseNumber;
+
+    public Case() {
     }
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "caseObj" ,cascade = CascadeType.ALL)
-    private Set<CasePerson> casePers = new HashSet<>(0);
+    public Case(Set<CasePerson> casePers, String caseNumber) {
+        this.caseNumber = caseNumber;
+        this.casePers = casePers;
+        this.casePers.forEach(a -> a.setCaseObj(this));
+    }
+
 
     public void setCaseNumber(String caseNumber) {
         this.caseNumber = caseNumber;
@@ -30,8 +42,5 @@ public class Case extends AuditDTO {
     public Set<CasePerson> getCasePers() {
         return casePers;
     }
-
-    @Column(name = "case_number", nullable = false, unique = true)
-    private String caseNumber;
 
 }

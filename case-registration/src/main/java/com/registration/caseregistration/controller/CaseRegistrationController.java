@@ -2,7 +2,6 @@ package com.registration.caseregistration.controller;
 
 
 import com.registration.caseregistration.model.Case;
-import com.registration.caseregistration.repository.CasePersRepository;
 import com.registration.caseregistration.repository.CaseRegistrationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,25 +19,11 @@ public class CaseRegistrationController {
     @Autowired
     private CaseRegistrationRepository repository;
 
-    @Autowired
-    private CasePersRepository casePersRepository;
-
-
     @PostMapping("/case")
     public Case createCase(@RequestBody Case caseObj) {
 
-        caseObj.setCaseNumber(this.createAndGetCaseNumber());
-
-        Case cobj = repository.save(caseObj);
-
-        caseObj.getCasePers()
-                .stream()
-                .forEach(a -> {
-                    a.setCaseId(cobj.getId());
-                    casePersRepository.save(a);
-                }
-        );
-        return cobj;
+        Case saveO = new Case(caseObj.getCasePers(), this.createAndGetCaseNumber());
+        return repository.saveAndFlush(saveO);
     }
 
 
