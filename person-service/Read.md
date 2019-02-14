@@ -5,11 +5,17 @@ Create :
 POST :
 JSON input string
 {
-	"id":"1",
+	
 	"firstName":"John",
 	"lastName":"Nelson",
 	"dateOfBirth" :"1985-01-19",
-	"gender" :"M"
+	"gender" :"M",
+	"cin" :"00300034",
+	"pregnancyActive":"false",
+	"maritalStatus":"married",
+	"disabilityActive":"false",
+	"ssn":"4555556677"
+	
 }
 
 H2 Database Connection:
