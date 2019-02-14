@@ -1,6 +1,6 @@
 package com.person.service;
 
-import com.person.controller.Case;
+import com.person.model.Case;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

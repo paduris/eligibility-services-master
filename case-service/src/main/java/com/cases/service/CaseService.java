@@ -19,8 +19,11 @@ public class CaseService {
 
     public Case createCase(Case caseObj)
     {
+        log.info("Entering createCase ");
         Case saveO = new Case(caseObj.getCasePers(), this.createAndGetCaseNumber());
+        log.info("Exiting createCase "+saveO.getCaseNumber());
         return repository.saveAndFlush(saveO);
+
 
     }
 

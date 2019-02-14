@@ -1,4 +1,4 @@
-package com.person.controller;
+package com.person.model;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

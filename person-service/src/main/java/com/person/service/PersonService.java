@@ -1,7 +1,7 @@
 package com.person.service;
 
-import com.person.controller.Case;
-import com.person.controller.CasePerson;
+import com.person.model.Case;
+import com.person.model.CasePerson;
 import com.person.model.Person;
 import com.person.repository.PersonRepository;
 import lombok.extern.slf4j.Slf4j;

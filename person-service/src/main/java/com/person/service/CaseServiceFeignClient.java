@@ -1,6 +1,6 @@
 package com.person.service;
 
-import com.person.controller.Case;
+import com.person.model.Case;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
