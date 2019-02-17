@@ -11,12 +11,13 @@
     <description>eligibility-services-master</description>
 
     <modules>
-        <module>income-service</module>
-        <module>service-registry</module>
-        <module>person-service</module>
         <module>case-service</module>
-        <module>verification-service</module>
+        <module>income-service</module>
+        <module>person-service</module>
         <module>rules-engine-service</module>
+        <module>service-registry</module>
+        <module>verification-service</module>
+        <module>zuul-gateway</module>
     </modules>
 
 
