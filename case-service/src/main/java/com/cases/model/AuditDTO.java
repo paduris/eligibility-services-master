@@ -17,18 +17,18 @@ import java.util.Date;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(
-        value = {"createdOn","updatedOn"},allowGetters = true
+        value = {"createdOn", "updatedOn"}, allowGetters = true
 )
 @EqualsAndHashCode
 public abstract class AuditDTO {
 
     @UpdateTimestamp
-    @Column(name="updated_on")
+    @Column(name = "updated_on")
     @LastModifiedDate
     private Date updatedOn;
 
     @CreationTimestamp
-    @Column(name="created_on", nullable = false, updatable = false)
+    @Column(name = "created_on", nullable = false, updatable = false)
     private Date createdOn;
 
     @Column(name = "effective_date")

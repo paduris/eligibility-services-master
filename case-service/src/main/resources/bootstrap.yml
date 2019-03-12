@@ -1,0 +1,49 @@
+  server:
+    port: 8900
+
+  spring:
+    application:
+      name: case-service
+
+    cloud:
+      config:
+        uri: http://config-server:8888
+
+    jpa:
+      show-sql: true
+      hibernate:
+        ddl-auto: update
+          properties:
+            dialect: org.hibernate.dialect.MySQL5Dialect
+
+    datasource:
+      url: jdbc:mysql://host.docker.internal:3306/eligibility?useSSL=false
+      initialization-mode: always
+      username: admin
+      password: admin
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+    h2:
+      console:
+        enabled: true
+
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: '*'
+
+  logging:
+    level:
+      ROOT: INFO
+
+  eureka:
+    client:
+      registerWithEureka: true
+      fetchRegistry: true
+      serviceUrl:
+        defaultZone: http://host.docker.internal:8761/eureka/
+    instance:
+      leaseRenewalIntervalInSeconds: 5
+      leaseExpirationDurationInSeconds: 5
+      preferIpAddress: false

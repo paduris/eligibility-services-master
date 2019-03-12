@@ -1,8 +1,7 @@
 package com.data.collection.income.model;
 
 import lombok.Data;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
@@ -11,7 +10,7 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "income")
-public class Income extends AuditDTO{
+public class Income extends AuditDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,7 +20,7 @@ public class Income extends AuditDTO{
     @Column(name = "type_code", nullable = false)
     private String typeCode;
 
-    @Column(name="pers_cin", nullable = false)
+    @Column(name = "pers_cin", nullable = false)
     @Size(max = 10)
     private String persCIN;
 
@@ -29,13 +28,13 @@ public class Income extends AuditDTO{
     private BigDecimal annualIncome;
 
     @Size(max = 100)
-    @Column(name ="source")
+    @Column(name = "source")
     private String source;
 
-    @Column(name ="effective_date",nullable = false)
+    @Column(name = "effective_date", nullable = false)
     private Date effectiveDate;
 
-    @Column(name ="end_date")
+    @Column(name = "end_date")
     private Date endDate;
 
 

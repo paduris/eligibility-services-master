@@ -13,11 +13,12 @@
     <modules>
         <module>case-service</module>
         <module>income-service</module>
-        <module>person-service</module>
-        <module>rules-engine-service</module>
+        <module>client-service</module>
+        <module>eligibility-determination-service</module>
         <module>service-registry</module>
         <module>verification-service</module>
         <module>zuul-gateway</module>
+        <module>config-service</module>
     </modules>
 
 

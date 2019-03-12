@@ -8,9 +8,9 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 @SpringBootApplication
 public class VerificationServiceApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(VerificationServiceApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(VerificationServiceApplication.class, args);
+    }
 
 }
 

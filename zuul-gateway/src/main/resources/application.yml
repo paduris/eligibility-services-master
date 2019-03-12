@@ -1,0 +1,33 @@
+info:
+  name: "Zuul Server"
+  description: "Gatekeeper"
+
+endpoints:
+  restart:
+    enabled: true
+
+zuul:
+  ignoredServices: "*"
+  routes:
+    clientservice:
+      path: /client/**
+      serviceId: client-service
+
+server:
+  port: 8500
+
+logging:
+  level:
+    ROOT: INFO
+    org.springframework.web: INFO
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://host.docker.internal:8761/eureka/
+  instance:
+    leaseRenewalIntervalInSeconds: 5
+    leaseExpirationDurationInSeconds: 5
+    preferIpAddress: false

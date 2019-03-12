@@ -1,0 +1,85 @@
+version: '3'
+services:
+  mysqldb:
+    image: mysql:latest
+    container_name: mysqldb
+    hostname: mysqldb
+    command: mysqld --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_DATABASE=eligibility
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: 'rabbitmq:management'
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  config-service:
+    container_name: config-service
+    build: ./config-service
+    ports:
+      - "8888:8888"
+      - "18787:8787"
+    depends_on:
+      - rabbitmq
+
+  zipkin-server:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    # Environment settings are defined here https://github.com/openzipkin/zipkin/tree/1.19.0/zipkin-server#environment-variables
+    environment:
+      - STORAGE_TYPE=mem
+      # Uncomment to disable scribe
+      # - SCRIBE_ENABLED=false
+      # Uncomment to enable self-tracing
+      # - SELF_TRACING_ENABLED=true
+      # Uncomment to enable debug logging
+      # - JAVA_OPTS=-Dlogging.level.zipkin=DEBUG
+    ports:
+      # Port used for the Zipkin UI and HTTP Api
+      - 9411:9411
+
+  service-registry:
+    container_name: service-registry
+    build: ./service-registry
+    ports:
+      - "8761:8761"
+      - "28787:8787"
+
+  zuul-gateway:
+    container_name: zuul-gateway
+    build: ./zuul-gateway
+    ports:
+      - "8500:8500"
+      - "58787:8787"
+
+  client-service:
+    container_name: client-service
+    build: ./client-service
+    ports:
+      - "18100:8100"
+      - "38787:8787"
+    depends_on:
+      - config-service
+      - mysqldb
+
+  case-service:
+    container_name: case-service
+    build: ./case-service
+    ports:
+      - "18900:8900"
+      - "48787:8787"
+    depends_on:
+      - config-service
+      - mysqldb
+
+

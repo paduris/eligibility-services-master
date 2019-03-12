@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface IncomeRepository extends JpaRepository<Income, Long> {
 
-    public Optional<List<Income>> findIncomesByPersCIN(String personCIN);
+    Optional<List<Income>> findIncomesByPersCIN(String personCIN);
 }
